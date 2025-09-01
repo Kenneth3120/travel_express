@@ -1,0 +1,48 @@
+<div class="card">
+    <h2 class="title">Tower Instances
+        <button class="add-instance-btn" ng-click="openAddInstanceModal()">Add AAP Instance</button>
+    </h2>
+    <div class="filters">
+        <label for="regionFilter">Region:</label>
+        <select id="regionFilter" ng-model="filters.region" ng-change="loadInstances()">
+            <option value="">All</option>
+            <option ng-repeat="region in uniqueRegions">{{region}}</option>
+        </select>
+  
+        <label for="environmentFilter">Environment:</label>
+        <select id="environmentFilter" ng-model="filters.environment" ng-change="loadInstances()">
+            <option value="">All</option>
+            <option ng-repeat="env in uniqueEnvironments">{{env}}</option>
+        </select>
+    </div>
+  
+    <table class="instance-table">
+      <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>URL</th>
+            <th>Region</th>
+            <th>Environment</th>
+            <th>Status</th>
+            <th>Last Health Check</th>
+            <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in instances | filter:filterByRegionAndEnvironment" ng-class="{'inactive': i.status !== 'active'}">
+            <td>{{i.id}}</td>
+            <td>{{i.name}}</td>
+            <td>{{i.url}}</td>
+            <td>{{i.region}}</td>
+            <td>{{i.environment}}</td>
+            <td>{{i.status}}</td>
+            <td>{{i.last_health_check | date:'short'}}</td>
+            <td>
+                <button ng-click="deleteInstance(i.id)" class="btn-delete">Delete</button>
+            </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div ng-include="'./app/partials/addInstanceModal.html'"></div>

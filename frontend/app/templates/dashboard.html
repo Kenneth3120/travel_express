@@ -1,0 +1,45 @@
+<div class="toast-stack">
+    <div class="toast" ng-repeat="toast in toasts" ng-class="toast.type">
+      <span class="icon">
+        <span ng-if="toast.type === 'success'">✔</span>
+        <span ng-if="toast.type === 'error'">✖</span>
+        <span ng-if="toast.type === 'info'">ℹ</span>
+        <span ng-if="toast.type === 'warning'">⚠</span>
+      </span>
+      <span class="message">{{toast.message}}</span>
+      <span class="close" ng-click="closeToast(toast.id)">X</span>
+    </div>
+  </div>
+  
+  <div class="dashboard-container">
+    <h2 class="title">Welcome to AAP Administration Dashboard</h2>
+    <div ng-if="loadingCounts" class="loader"></div>
+  
+    <div class="cards-row">
+      <div class="stat-card">Instances: {{instanceCount}}</div>
+      <div class="stat-card">Credentials: {{credentialCount}}</div>
+      <div class="stat-card">Environments: {{environmentCount}}</div>
+    </div>
+  
+    <div class="card">
+      <div class="recent-logs">
+        <h3>Recent Changes</h3>
+        <h4>The latest 5 changes</h4>
+        <div ng-if="loadingLogs" class="loader"></div>
+        <ul ng-if="!loadingLogs">
+          <li ng-repeat="log in recentChanges">
+            <strong>{{log.user}}</strong>
+            <strong>{{log.action}}</strong> the 
+            <strong>{{log.object_type}}</strong>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="chart-container" ng-if="!loadingCounts">
+      <div class="chart-box">
+        <h3>Job Chart</h3>
+        <canvas id="JobChart"></canvas>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+<div id="addInstanceModal" class="modal" ng-show="showAddInstanceModal">
+  <div class="modal-content">
+    <span class="close-button" ng-click="closeAddInstanceModal()">&times;</span>
+    <h2>Add New AAP Instance</h2>
+    <form name="addInstanceForm">
+      <label for="instanceName">Name:</label>
+      <input type="text" id="instanceName" ng-model="newInstance.name" required>
+
+      <label for="instanceUrl">URL:</label>
+      <input type="url" id="instanceUrl" ng-model="newInstance.url" required>
+
+      <label for="instanceUsername">Username:</label>
+      <input type="text" id="instanceUsername" ng-model="newInstance.username" required>
+
+      <label for="instancePassword">Password:</label>
+      <input type="password" id="instancePassword" ng-model="newInstance.password" required>
+
+      <label for="instanceRegion">Region:</label>
+      <input type="text" id="instanceRegion" ng-model="newInstance.region" required>
+
+      <label for="instanceEnvironment">Environment:</label>
+      <input type="text" id="instanceEnvironment" ng-model="newInstance.environment" required>
+
+      <button type="button" ng-click="testConnection()">Test Connection</button>
+      <span ng-if="connectionTestStatus">Status: {{connectionTestStatus}}</span>
+      <span ng-if="connectionTestError" class="error-message">Error: {{connectionTestError}}</span>
+
+      <button type="submit" ng-disabled="!connectionSuccessful" ng-class="{'btn-success': connectionSuccessful}" ng-click="addInstance()">Create Instance</button>
+    </form>
+  </div>
+</div> 

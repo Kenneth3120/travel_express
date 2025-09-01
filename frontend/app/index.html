@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="towerAdminApp" lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AAP Administration BNP</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- AngularJS + Chart.js -->
+  <script src="./node_modules/angular/angular.min.js"></script>
+  <script src="./node_modules/angular-route/angular-route.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- App & Controllers -->
+  <script src="./app/app.js"></script>
+  <script src="./app/controllers/maincontroller.js"></script>
+  <script src="./app/services/apiservice.js"></script>
+  <script src="./app/services/authUserService.js"></script>
+  <script src="./app/controllers/instanceController.js"></script>
+  <script src="./app/controllers/credentialController.js"></script>
+  <script src="./app/controllers/environmentController.js"></script>
+  <script src="./app/controllers/statisticsController.js"></script>
+  <script src="./app/controllers/auditLogController.js"></script>
+  <script src="./app/controllers/configController.js"></script>
+  <script src="./app/controllers/dashboardController.js"></script>
+  <script src="./app/controllers/sidebarController.js"></script>
+  <script src="./app/controllers/ThemeController.js"></script>
+  <script src="./app/controllers/UserMgmtController.js"></script>
+  <script src="./app/controllers/loginController.js"></script>
+
+  <!-- Theme Toggle Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let themeToggleBtn = document.getElementById('themeToggleBtn');
+      const body = document.body;
+
+      if (!themeToggleBtn) {
+        themeToggleBtn = document.createElement('button');
+        themeToggleBtn.id = 'themeToggleBtn';
+        themeToggleBtn.className = 'theme-toggle-btn';
+        themeToggleBtn.innerHTML = '🌙';
+        document.body.appendChild(themeToggleBtn);
+      }
+
+      // Apply saved theme
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        themeToggleBtn.innerHTML = '☀️';
+      }
+
+      // Toggle on click
+      themeToggleBtn.addEventListener('click', function () {
+        const isDark = body.classList.toggle('dark-mode');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        themeToggleBtn.innerHTML = isDark ? '☀️' : '🌙';
+      });
+    });
+  </script>
+</head>
+
+<body ng-controller="MainController">
+
+  <div ng-if="isAuthenticated">
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="nav-left">AAP Administration</div>
+      <div class="nav-right">
+
+        <!-- Settings Icon -->
+        <a href="#" class="icon-link" aria-label="Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="1"></circle>
+            <circle cx="12" cy="5" r="1"></circle>
+            <circle cx="12" cy="19" r="1"></circle>
+          </svg>
+        </a>
+
+        <!-- Profile Icon -->
+        <a href="#" class="icon-link" aria-label="Profile">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+        </a>
+
+        <!-- Logout -->
+        <a href="#" class="logout-btn" ng-click="logout()">Logout</a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <ul>
+          <li><a href="#!/dashboard" ng-class="{'active': isActive('/dashboard')}">Dashboard</a></li>
+          <li><a href="#!/instances" ng-class="{'active': isActive('/instances')}">Tower Instances</a></li>
+          <li><a href="#!/credential-types" ng-class="{'active': isActive('/credential-types')}">Credential Types</a></li>
+          <li><a href="#!/environments" ng-class="{'active': isActive('/environments')}">Execution Environments</a></li>
+          <li><a href="#!/statistics" ng-class="{'active': isActive('/statistics')}">Statistics</a></li>
+          <li><a href="#!/audit-logs" ng-class="{'active': isActive('/audit-logs')}">Audit Logs</a></li>
+          <li><a href="#!/config" ng-class="{'active': isActive('/config')}">Configuration</a></li>
+          <li><a href="#!/users" ng-class="{'active': isActive('/users')}">User Management</a></li>
+        </ul>
+      </div>
+
+      <!-- View -->
+      <div class="content" ng-view></div>
+    </div>
+
+    <!-- Floating Theme Toggle -->
+    <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle Theme">🌙</button>
+  </div>
+
+  <div ng-if="!isAuthenticated">
+      <div ng-include="'./app/partials/login.html'"></div>
+  </div>
+
+</body>
+</html>

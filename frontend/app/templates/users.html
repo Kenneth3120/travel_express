@@ -1,0 +1,24 @@
+<div class="card">
+    <h2>User Management</h2>
+    <button ng-click="showAddForm = !showAddForm">
+      {{showAddForm ? 'Cancel' : 'Add User'}}
+    </button>
+  
+    <div ng-if="showAddForm">
+      <input type="text" ng-model="newUser.username" placeholder="Username" />
+      <input type="email" ng-model="newUser.email" placeholder="Email" />
+      <select ng-model="newUser.role">
+        <option value="viewer">Viewer</option>
+        <option value="admin">Admin</option>
+      </select>
+      <button ng-click="addUser()">Save</button>
+    </div>
+  
+    <ul>
+      <li ng-repeat="u in users">
+        {{u.username}} - {{u.email}} ({{u.role}})
+        <button ng-click="updateUser(u)">Update</button>
+        <button ng-click="deleteUser(u.id)">Delete</button>
+      </li>
+    </ul>
+  </div>

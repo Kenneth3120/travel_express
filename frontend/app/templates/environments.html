@@ -1,0 +1,15 @@
+<div class="card">
+    <h2>Manage Environments</h2>
+    <form ng-submit="addEnvironment()">
+      <input type="text" ng-model="newEnvironment.name" placeholder="Name" required />
+      <input type="text" ng-model="newEnvironment.description" placeholder="Description" />
+      <button type="submit">Add</button>
+    </form>
+  
+    <ul>
+      <li ng-repeat="e in environments">
+        {{e.name}} - {{e.description}}
+        <button ng-click="deleteEnvironment(e.id)">Delete</button>
+      </li>
+    </ul>
+  </div>
