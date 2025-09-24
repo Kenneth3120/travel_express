@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <div class="left">
+    <img src="assets/images/logo.png" alt="Company Logo" class="logo" />
+    <span class="title">AAP Administration</span>
+  </div>
+
+  <div class="right">
+    <div class="dropdown">
+      <button class="menu-btn">⋮</button>
+      <div class="dropdown-content">
+        <a (click)="viewProfile()">View Profile</a>
+        <a (click)="settings()">Settings</a>
+      </div>
+    </div>
+    <button class="toggle-mode-btn" (click)="toggleTheme()">🌗</button>
+    <button class="logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<div class="content">
+  <h1>Welcome to Dashboard</h1>
+</div>
