@@ -1,0 +1,81 @@
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between; /* left group and right group */
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: var(--nav-bg, #222); /* dark mode default */
+  color: var(--nav-color, #fff);
+}
+
+/* Left side of navbar */
+.navbar .left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar .logo {
+  width: 32px;
+  height: 32px;
+}
+
+.navbar .title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Right side of navbar */
+.navbar .right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.menu-btn,
+.toggle-mode-btn,
+.logout-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Dropdown styling */
+.dropdown {
+  position: relative;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--nav-bg, #222);
+  min-width: 120px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  z-index: 1000;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--nav-color, #fff);
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Page content below navbar */
+.content {
+  padding: 2rem;
+  color: var(--text-color, #fff);
+}
