@@ -1,0 +1,40 @@
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isSidebarCollapsed }">
+  <!-- Sidebar Header -->
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span [ngClass]="{ 'logo-collapsed': isSidebarCollapsed }">
+        {{ isSidebarCollapsed ? 'AAP' : 'AAP Administration' }}
+      </span>
+    </div>
+  </div>
+
+  <!-- Toggle Button -->
+  <div class="sidebar-toggle">
+    <button mat-icon-button 
+            class="toggle-btn" 
+            (click)="toggleSidebar()"
+            [attr.aria-label]="isSidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+      <mat-icon>{{ isSidebarCollapsed ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+    </button>
+  </div>
+
+  <!-- Menu Items -->
+  <div class="sidebar-menu">
+    <mat-nav-list>
+      <mat-list-item 
+        *ngFor="let item of menuItems"
+        class="sidebar-item"
+        [routerLink]="item.route"
+        routerLinkActive="active-item"
+        (click)="onMenuItemClick(item)">
+        
+        <mat-icon matListItemIcon class="menu-icon">{{ item.icon }}</mat-icon>
+        <span matListItemTitle 
+              class="menu-label" 
+              [ngClass]="{ 'label-hidden': isSidebarCollapsed }">
+          {{ item.label }}
+        </span>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+</div>
